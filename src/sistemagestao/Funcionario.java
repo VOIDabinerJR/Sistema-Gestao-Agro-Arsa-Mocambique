@@ -1,4 +1,3 @@
-
 package sistemagestao;
 
 import java.sql.Connection;
@@ -13,62 +12,58 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static sistemagestao.Cliente.obterConexao;
 
-/**
- *
- * @author DELL
- */
 public class Funcionario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Cliente
-     */
     public Funcionario() {
         initComponents();
         tb_load();
     }
-     private static Connection connection;
+    private static Connection connection;
 //    Class.forName("com.mysql.jbdc.Driver");
     private static String URL = "jdbc:mysql://localhost:3306/sistema";
     private static String USER = "root";
     private static String PASSWORD = "0000";
 
-
     public static Connection obterConexao() throws SQLException {
-        if(connection == null) {
+        if (connection == null) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
         }
         return connection;
     }
+
     public static boolean verificarconexao() throws SQLException {
-        if(connection == null) {
+        if (connection == null) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         return true;
     }
+
     public static boolean verificarConexao() {
         Connection conexao = null;
 
         try {
-
 
             conexao = DriverManager.getConnection(URL, USER, PASSWORD);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }}
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
         System.out.println(obterConexao());
     }
 
-
     public void fecharConexao() throws SQLException {
-        if(connection != null)
+        if (connection != null) {
             connection.close();
+        }
     }
-     public void tb_load() {
-        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+    public void tb_load() {
+        DefaultTableModel dt = (DefaultTableModel) jTable0.getModel();
         dt.setRowCount(0);
 
         String sql = "select * from funcionario;";
@@ -78,8 +73,7 @@ public class Funcionario extends javax.swing.JPanel {
             pst = obterConexao().prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-             Vector<String> v = new Vector<>();
-
+                Vector<String> v = new Vector<>();
 
                 v.add(rs.getString(1));
                 v.add(rs.getString(2));
@@ -115,11 +109,13 @@ public class Funcionario extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable0 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfprocurarTB = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
@@ -222,7 +218,7 @@ public class Funcionario extends javax.swing.JPanel {
                 .addGap(45, 45, 45))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable0.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -233,7 +229,12 @@ public class Funcionario extends javax.swing.JPanel {
                 "ID", "Nome Funcionario", "Numero de T P"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTable0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable0MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable0);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -278,6 +279,22 @@ public class Funcionario extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Filtrar por Nome:");
+
+        tfprocurarTB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfprocurarTB.setText("0");
+        tfprocurarTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfprocurarTBActionPerformed(evt);
+            }
+        });
+        tfprocurarTB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfprocurarTBKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,8 +304,15 @@ public class Funcionario extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel6)
+                        .addGap(41, 41, 41)
+                        .addComponent(tfprocurarTB, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,8 +324,12 @@ public class Funcionario extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfprocurarTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -321,7 +349,7 @@ public class Funcionario extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         String nome = jTextField1.getText();
+        String nome = jTextField1.getText();
         String numero = jTextField3.getText();
         String sql = "insert into funcionario (nome, numerotelefone ) values ('" + nome + "','" + numero + "');";
         PreparedStatement pst = null;
@@ -337,7 +365,7 @@ public class Funcionario extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         String sql = "select * from cliente where id='" + jTextField2.getText() + "';";
+        String sql = "select * from funcionario where id='" + jTextField2.getText() + "';";
         PreparedStatement pst;
         try {
             pst = obterConexao().prepareStatement(sql);
@@ -353,14 +381,14 @@ public class Funcionario extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "erro");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Funcionario.class.getName()).log(Level.SEVERE, null, ex);
         }
         tb_load();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-           String id = jTextField2.getText();
+        String id = jTextField2.getText();
         String sql = "delete from funcionario where id='" + id + "';";
         PreparedStatement pst = null;
         try {
@@ -375,7 +403,7 @@ public class Funcionario extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-          String nome = jTextField1.getText();
+        String nome = jTextField1.getText();
         String numero = jTextField3.getText();
         String id = jTextField2.getText();
         String sql = "update funcionario set  nome='" + nome + "', numerotelefone='" + numero + "' where id='" + id + "';";
@@ -388,26 +416,18 @@ public class Funcionario extends javax.swing.JPanel {
             System.out.println(e);
         }
         tb_load();
-    }                                        
+    }
 
-    private void tfnumeroActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void tfnumeroActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void tfprocurarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void tfprocurarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                          
+    }
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        int r = jTable1.getSelectedRow();
-
-        String id = jTable1.getValueAt(r, 0).toString();
-        String nome = jTable1.getValueAt(r, 1).toString();
-        String telefone = jTable1.getValueAt(r, 2).toString();
-        jTextField2.setText(id);
-        jTextField1.setText(nome);
-        jTextField3.setText(telefone);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -417,6 +437,52 @@ public class Funcionario extends javax.swing.JPanel {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTable0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable0MouseClicked
+        // TODO add your handling code here:
+        int r = jTable0.getSelectedRow();
+
+        String id = jTable0.getValueAt(r, 0).toString();
+        String nome = jTable0.getValueAt(r, 1).toString();
+        String telefone = jTable0.getValueAt(r, 2).toString();
+        jTextField2.setText(id);
+        jTextField1.setText(nome);
+        jTextField3.setText(telefone);
+    }//GEN-LAST:event_jTable0MouseClicked
+
+    private void tfprocurarTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfprocurarTBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfprocurarTBActionPerformed
+
+    private void tfprocurarTBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfprocurarTBKeyReleased
+        // TODO add your handling code here:
+
+        try {
+            DefaultTableModel dt = (DefaultTableModel) jTable0.getModel();
+            dt.setRowCount(0);
+            
+            String nome = tfprocurarTB.getText();
+            ResultSet rs;
+
+            String sql = "select * from funcionario where nome like '%" + nome + "%';";
+            PreparedStatement pst = null;
+
+            pst = obterConexao().prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Vector<String> v = new Vector<>();
+
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+
+                dt.addRow(v);
+
+            }
+        } catch (Exception e) {
+            tb_load();
+        }
+    }//GEN-LAST:event_tfprocurarTBKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -428,13 +494,15 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable0;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField tfprocurarTB;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,6 +40,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton2);
         jToggleButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/customer.png"))); // NOI18N
         jToggleButton2.setText("Clientes");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +50,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton3);
         jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/supplier.png"))); // NOI18N
         jToggleButton3.setText("Fornecedor");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,6 +60,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton5);
         jToggleButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/emp.png"))); // NOI18N
         jToggleButton5.setText("Funcionarios");
         jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +70,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton6);
         jToggleButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/product.png"))); // NOI18N
         jToggleButton6.setText("Produto");
         jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +80,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton7);
         jToggleButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/sales_menu.png"))); // NOI18N
         jToggleButton7.setText("Vendas");
         jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +90,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton8);
         jToggleButton8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/invo.png"))); // NOI18N
         jToggleButton8.setText("Faturas");
         jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +109,7 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp.add(jToggleButton9);
         jToggleButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jToggleButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemagestao/img/reports.png"))); // NOI18N
         jToggleButton9.setText("Relatorios");
         jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,18 +213,26 @@ public class Home extends javax.swing.JFrame {
 
     private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
         // TODO add your handling code here:
+         Cliente venda = new Cliente();
+          jpload.jPanelLoader(panel_load, venda);
     }//GEN-LAST:event_jToggleButton9ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
+         Cliente venda = new Cliente();
+          jpload.jPanelLoader(panel_load, venda);
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
         // TODO add your handling code here:
+         Cliente venda = new Cliente();
+          jpload.jPanelLoader(panel_load, venda);
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-        // TODO add your handling code here:
+      
+         Vendas venda = new Vendas();
+          jpload.jPanelLoader(panel_load, venda);
     }//GEN-LAST:event_jToggleButton7ActionPerformed
 
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed

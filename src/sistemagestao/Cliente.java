@@ -281,7 +281,7 @@ public class Cliente extends javax.swing.JPanel {
         jLabel5.setText("PESQUISAR ID:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("PESQUISAR:");
+        jLabel6.setText("Filtrar por Nome:");
 
         tfprocurarTB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tfprocurarTB.setText("0");
@@ -310,8 +310,8 @@ public class Cliente extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfprocurarTB)))
+                        .addGap(29, 29, 29)
+                        .addComponent(tfprocurarTB, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
