@@ -336,7 +336,7 @@ public class Vendas extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome", "Marca", "Preco Unity", "Quantidade", "Preco Total", ""
+                "ID", "Cliente", "Produto", "Quantidade", "Preco Unity", "Preco Total", ""
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -644,13 +644,13 @@ public class Vendas extends javax.swing.JPanel {
 
                 String inid = jLabel5.getText();  // get inid
                 String produtid = dt.getValueAt(i, 0).toString(); // get barcode
-                String P_name = dt.getValueAt(i, 1).toString(); // get product name
+                String P_name = dt.getValueAt(i, 2).toString(); // get product name
                 String qty = dt.getValueAt(i, 3).toString(); // get product qty
                 String un_price = dt.getValueAt(i, 4).toString(); // get product unit price
                 String tot_price = dt.getValueAt(i, 5).toString(); // get product total Price
 
                 // cart DB
-                String sql = " INSERT INTO cart (INID, Product_Name, Bar_code, qty, Unit_Price, Total_Price) VALUES ('" + inid + "','" + P_name + "','" + produtid + "','" + qty + "','" + un_price + "','" + tot_price + "'); ";
+                String sql = " INSERT INTO carinho (idFatura, nomeProduto, idProduto, quantidade, precoUnit, precoTotal) VALUES ('" + inid + "','" + P_name + "','" + produtid + "','" + qty + "','" + un_price + "','" + tot_price + "'); ";
                 PreparedStatement pst = null;
                 pst = obterConexao().prepareStatement(sql);
                 pst.execute();
@@ -660,6 +660,8 @@ public class Vendas extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Data Seved");
 
         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "erro");
+             System.out.println(e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
