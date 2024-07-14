@@ -109,6 +109,26 @@ public class Vendas extends javax.swing.JPanel {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        try {
+
+            String sql = "SELECT * FROM extra WHERE id =1;";
+            PreparedStatement pst = null;
+            ResultSet rs;
+            pst = obterConexao().prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+
+                jLabel5.setText(rs.getString("val"));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        // pluss new invoice
+        int i = Integer.valueOf(jLabel5.getText());
+        i++;
+        jLabel5.setText(String.valueOf(i));
 
     }
 
@@ -635,6 +655,8 @@ public class Vendas extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // enviar para o banco
+
+        //CARINHO
         try {
             //`ID`,`idFatura`,  `nomeProduto`, `idProduto`,`quantidade`,`precoUnit`,  `precoTotal`
             DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
@@ -657,11 +679,59 @@ public class Vendas extends javax.swing.JPanel {
 
             }
 
-            JOptionPane.showMessageDialog(null, "Data Seved");
-
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "erro");
-             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "erro");
+            System.out.println(e);
+        }
+
+        try {
+
+            // VENDAS
+            //`saleid`, `INID`, `Cid`, `Customer_Name`, `Total_Qty`, `Total_Bill`, `Status`, `Balance`
+            String inv_id = jLabel5.getText();  // get inid
+            String cname = jComboBox1.getSelectedItem().toString();
+            String totqty = jLabel18.getText();
+            String tot_bil = jTextField3.getText();
+            String blnc = jTextField4.getText();
+            //SELECT * FROM CLIENTE WHERE ID = ?  CUS_ID = Rs.getresult("id");
+            String cus_id = "03";
+            // paid check
+
+            Double tot = Double.valueOf(jTextField3.getText());
+            Double pid = Double.valueOf(jTextField2.getText());
+            String Status = null;
+            if (pid.equals(0.0)) {
+
+                Status = "UnPaid";
+
+            } else if (tot > pid) {
+                Status = "Partial";
+
+            } else if (tot <= pid) {
+                Status = "Paid";
+            }
+
+            String sql = "INSERT INTO VENDAS(idFatura, idCiente, nomeCliente, quantidadeTotal, totalPago, Status, Troco) VALUES('" + inv_id + "','" + cus_id + "','" + cname + "','" + totqty + "','" + tot_bil + "','" + Status + "','" + blnc + "')";
+            PreparedStatement pst = null;
+            pst = obterConexao().prepareStatement(sql);
+            pst.execute();
+
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+
+        //EXTRA
+        // save las inid number
+        try {
+            String id = jLabel5.getText();
+            String sql = "UPDATE  extra SET val='" + id + "' WHERE id = 1;";
+            PreparedStatement pst = null;
+            pst = obterConexao().prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Seved");
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -685,13 +755,11 @@ public class Vendas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        //GEN-FIRST:event_p_qtyKeyReleased
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {
 
         pro_tot_cal();
 
-
-    }//GEN-LAST:event_jTextField1KeyReleased
+    }
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         tot();
