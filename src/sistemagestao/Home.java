@@ -213,8 +213,8 @@ public class Home extends javax.swing.JFrame {
 
     private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
         // TODO add your handling code here:
-         Cliente venda = new Cliente();
-          jpload.jPanelLoader(panel_load, venda);
+         Relatorios relatorio = new Relatorios();
+          jpload.jPanelLoader(panel_load, relatorio);
     }//GEN-LAST:event_jToggleButton9ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
@@ -224,8 +224,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
-        // TODO add your handling code here:
-         Cliente venda = new Cliente();
+       
+        Fatura venda = new Fatura();
           jpload.jPanelLoader(panel_load, venda);
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
